@@ -1,0 +1,221 @@
+/* Report.css */
+
+
+
+/* --- Filter Card Layout --- */
+.filter-card-layout {
+  margin-bottom: 20px;
+  background-color: #2c2f38; /* Match other cards */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #e0e0e0;
+}
+
+.filter-card-layout .card-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #4a4d59; /* Divider */
+}
+
+.filter-card-layout .card-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.filter-card-layout .card-body {
+  padding: 20px;
+}
+
+.filter-grid {
+  display: grid;
+  /* --- THIS IS THE FIX: Force 6 columns --- */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px 20px; /* Row and column gap */
+}
+
+.filter-card-layout .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-card-layout .form-group label {
+  font-size: 0.85em; /* Smaller label */
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #a0a5b1; /* Lighter label color */
+}
+
+/* Ensure form-input and form-select are styled (reuse from global or define here) */
+.form-input,
+.form-select,
+.react-datepicker-wrapper,
+.react-datepicker-wrapper input { /* Target datepicker input */
+  width: 100%;
+  padding: 8px 12px; /* Slightly smaller padding */
+
+  border: 1px solid #4a4d59;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-size: 0.95em;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Specific styling for DatePicker input */
+.react-datepicker-wrapper .form-input {
+    width: 100%; /* Ensure DatePicker takes full width */
+}
+
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+/* Remove the footer from the filter card since the button is gone */
+.filter-card-layout .card-footer {
+  display: none;
+}
+
+
+/* --- Chart Card --- */
+.chart-card {
+  padding: 15px;
+  background-color: #2c2f38;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #e0e0e0;
+  
+  /* --- THIS IS THE FIX: Set a max-height --- */
+  max-height: 400px; /* Prevents the graph from being too tall */
+  margin-top: 20px; /* Add margin since it's at the bottom */
+}
+
+.chart-card .card-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #4a4d59;
+    margin-bottom: 15px; /* Space between header and chart */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chart-card .card-header h3 {
+     margin: 0;
+     font-size: 1.1em;
+}
+
+
+/* --- Summary Bar (reuse or define) --- */
+.summary-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background-color: #252830;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+  font-weight: 600;
+}
+
+/* --- Table Styles (reuse or define) --- */
+.report-table-card {
+  background-color: #2c2f38;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden; /* Needed for table border radius */
+}
+
+.table-container {
+   overflow-x: auto; /* Allow horizontal scroll on small screens */
+   padding: 0; /* Remove padding if table takes full width */
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e0e0e0;
+}
+
+.report-table th,
+.report-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #4a4d59;
+}
+
+.report-table th {
+  background-color: #343a40; /* Header background */
+  font-weight: 600;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  color: #adb5bd;
+}
+
+.report-table tbody tr:hover {
+  background-color: #3a3f47; /* Hover row background */
+}
+
+.report-table td {
+    font-size: 0.95em;
+}
+
+/* Status colors (reuse or define) */
+.status-pending { color: #ffc107; font-weight: bold; }
+.status-redeemed { color: #28a745; font-weight: bold; }
+.status-expired { color: #dc3545; font-weight: bold; }
+.status-voided { color: #6c757d; font-weight: bold; text-decoration: line-through;}
+.status-unknown { color: #adb5bd; } /* Fallback */
+
+
+/* Clickable name style */
+.clickable-name {
+  background: none;
+  border: none;
+  color: #0d6efd; /* Link color */
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: underline;
+}
+.clickable-name:hover {
+  color: #4dabf7;
+}
+
+
+/* --- Pagination --- */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #252830;
+  border-top: 1px solid #4a4d59;
+  color: #adb5bd;
+  font-size: 0.9em;
+}
+
+.btn-paginate {
+  background-color: #495057;
+  border: 1px solid #6c757d;
+  color: #e0e0e0;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.btn-paginate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-paginate:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+/* Loading Row */
+.loading-row td {
+    text-align: center;
+    padding: 30px 0;
+}

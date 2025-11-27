@@ -1,0 +1,1403 @@
+/* Import a clean, professional font from Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- Reset and Base Styles --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #1a1c23; /* Dark background */
+  color: #e0e0e0; /* Light text */
+  margin: 0; /* Remove default body margin */
+}
+
+/* --- App Layout --- */
+.app-layout {
+  display: flex;
+  background-color: #1e1f24;
+  color: #e0e0e0;
+  /* --- ADD THESE --- */
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* --- ADD THESE --- */
+  height: 100vh;
+  overflow-y: auto; /* Make only the content scroll */
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: #23252e; /* Darker than body */
+  border-bottom: 1px solid #30333d; /* Subtle border */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.main-header h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.content-area {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header Search Box --- */
+.header-search {
+  display: flex;
+  align-items: center;
+}
+.header-search > div { /* Target the react-select container */
+  width: 100%;
+  min-width: 350px;
+}
+
+/* --- General Card Style --- */
+.card {
+  background-color: #23252e;
+  border-radius: 8px;
+  border: 1px solid #30333d;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+/* --- Spinner --- */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 50px;
+}
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+.loading-spinner div {
+  width: 10px; height: 10px; background-color: #3498db; border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+.loading-spinner .dot1 { animation-delay: -0.32s; }
+.loading-spinner .dot2 { animation-delay: -0.16s; }
+
+/* ========================================= */
+/* --- DASHBOARD LAYOUT --- */
+/* ========================================= */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr 1fr;
+  gap: 20px;
+  grid-template-areas:
+    "tabs tabs tabs"
+    "created redeemed stats"
+    "latest pending top"
+    "latest inactive top";
+}
+
+/* Dashboard Controls (Tabs & Search) */
+.dashboard-controls {
+  grid-area: tabs;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 10px;
+}
+.tab-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background-color: #30333d;
+  color: #a0a5b1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tab-button.active {
+  background-color: #3498db;
+  color: #fff;
+}
+.tab-button:hover:not(.active) {
+  background-color: #4a4d59;
+}
+
+.dashboard-search {
+  min-width: 350px;
+}
+/* Style react-select within dashboard search */
+.dashboard-search .css-b62m3t-container { font-size: 0.95em; }
+.dashboard-search .css-13cymwt-control,
+.dashboard-search .css-t3ipsp-control {
+    background-color: #30333d;
+    border-color: #4a4d59;
+    min-height: 42px;
+}
+/* Dashboard Search Dropdown */
+.dashboard-search .css-1nmdiq5-menu,
+.dashboard-search .css-avt5d7-menu { background-color: #30333d; }
+.dashboard-search .css-d7l1ni-option,
+.dashboard-search .css-tr4s17-option {
+  background-color: #30333d; color: #e0e0e0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dashboard-search .css-1n7v3ny-option,
+.dashboard-search .css-1234789-option { /* Adjust focused class if needed */
+  background-color: #3498db; color: #ffffff;
+}
+
+/* Dashboard Stat Cards */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+}
+.stat-card.created-card { grid-area: created; }
+.stat-card.redeemed-card { grid-area: redeemed; }
+.stats-breakdown {
+  grid-area: stats;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.stat-icon { font-size: 2.5em; padding: 12px; border-radius: 50%; }
+.created-card .stat-icon { color: #f39c12; background-color: rgba(243, 156, 18, 0.1); }
+.redeemed-card .stat-icon { color: #2ecc71; background-color: rgba(46, 204, 113, 0.1); }
+.stat-info .stat-label { font-size: 0.9em; color: #a0a5b1; margin-bottom: 4px; }
+.stat-info .stat-big-number { font-size: 2.2em; font-weight: 700; color: #fff; line-height: 1.1; }
+.stat-info .stat-subtext { font-size: 0.9em; color: #a0a5b1; }
+
+/* Dashboard List Cards */
+.list-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.list-card.latest-redemptions { grid-area: latest; }
+.list-card.pending-coupons { grid-area: pending; }
+.list-card.top-redeemers { grid-area: top; }
+.list-card.inactive-customers { grid-area: inactive; }
+
+/* Shared Card Header/Body Styles */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #30333d;
+  flex-shrink: 0;
+}
+.card-header .card-icon { color: #a0a5b1; font-size: 1.2em; }
+.card-header h3 { margin: 0; font-size: 1.1em; font-weight: 600; color: #e0e0e0; }
+.card-body.scrollable-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0 20px 20px 20px;
+}
+
+/* Shared Info Card Styles (used inside lists) */
+.info-card {
+  background-color: #2a2d35;
+  border: 1px solid #4a4d59;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px; /* Overridden by .coupon-list-item if needed */
+}
+.info-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #4a4d59;
+}
+/* Adjust info-card-header for tier badge */
+.info-card-header button.clickable-name { flex-grow: 0; margin-right: auto; }
+
+.info-card-highlight { color: #ffa500; font-weight: 700; font-size: 1em; }
+.info-card-details { list-style: none; padding: 0; margin: 10px 0 0 0; font-size: 0.9em; color: #a0a5b1; }
+.info-card-details li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.info-card-details li span { display: flex; align-items: center; gap: 6px; }
+.info-card-details li strong { color: #e0e0e0; font-weight: 600; }
+.info-card-details li.divider { height: 1px; background-color: #4a4d59; margin: 8px 0; padding: 0; list-style: none; }
+
+/* Clickable Name Style */
+.clickable-name {
+  background: none; border: none; padding: 0; margin: 0; font-family: inherit;
+  font-size: inherit; font-weight: 600; color: #3498db; cursor: pointer; text-align: left;
+}
+.clickable-name:hover { text-decoration: underline; color: #5dade2; }
+
+/* Stats Breakdown List Styles */
+.stat-group { margin-bottom: 15px; }
+.stat-group > strong { display: flex; align-items: center; gap: 8px; font-size: 1em; font-weight: 600; margin-bottom: 10px; }
+.stat-breakdown-list .list-item-small { display: flex; justify-content: space-between; font-size: 0.9em; padding: 5px 8px; border-radius: 4px; }
+.stat-breakdown-list .list-item-small:nth-child(odd) { background-color: #2a2d35; }
+.stat-breakdown-list .text-muted { font-size: 0.9em; color: #a0a5b1; }
+
+/* ========================================= */
+/* --- REPORT & FILTER STYLES --- */
+/* ========================================= */
+.report-page h2 { margin-bottom: 20px; } /* For Staff/Tier reports */
+
+/* Professional Filter Section */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 25px;
+}
+.filter-section .form-input,
+.filter-section .form-select,
+.filter-section .react-datepicker-wrapper .form-input {
+  background-color: #30333d; color: #e0e0e0; border: 1px solid #4a4d59;
+  border-radius: 6px; padding: 10px 14px; font-size: 1em; font-family: inherit;
+  height: 42px; margin: 0;
+}
+.filter-section .form-input:hover,
+.filter-section .form-select:hover { border-color: #3498db; }
+.filter-section .form-input:focus,
+.filter-section .form-select:focus { outline: none; border-color: #3498db; }
+.filter-section .react-datepicker-wrapper .form-input { width: 140px; }
+.filter-section .search-input { flex-grow: 1; min-width: 200px; }
+.filter-section .form-select { min-width: 150px; }
+.filter-section .search-btn-aligned { height: 42px; padding: 10px 20px; margin-left: auto; }
+
+/* Summary Bar */
+.summary-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 25px;
+  font-weight: 600;
+  font-size: 1.1em;
+  background-color: #2a2d35;
+}
+.summary-bar div strong { color: #a0a5b1; margin-right: 8px; }
+
+/* Report Table Styles */
+.report-table-card .card-body { padding: 0; }
+.report-table { width: 100%; border-collapse: collapse; }
+.report-table th, .report-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #30333d; }
+.report-table th { background-color: #2a2d35; font-weight: 600; color: #e0e0e0; }
+.report-table tbody tr:hover { background-color: #2a2d35; }
+/* Right-align numeric data */
+.report-table td:nth-child(n+2),
+.report-table th:nth-child(n+2) { text-align: right; }
+/* Report table row indentation */
+.report-table tbody tr.indented-row td:first-child { padding-left: 30px; }
+.report-table tbody tr.primary-row .clickable-name { font-weight: 600; }
+
+/* Status Colors */
+td.status-redeemed { color: #27ae60; font-weight: 600; }
+td.status-pending { color: #f39c12; font-weight: 600; }
+td.status-expired { color: #e74c3c; font-weight: 600; text-decoration: line-through; }
+
+/* ========================================= */
+/* --- CUSTOMER TIER BADGES --- */
+/* ========================================= */
+.tier-badge {
+  font-size: 0.8em; font-weight: 600; padding: 3px 8px; border-radius: 4px;
+  margin-left: 10px; color: #fff; text-transform: uppercase; vertical-align: middle;
+}
+.tier-bronze { background-color: #cd7f32; }
+.tier-silver { background-color: #c0c0c0; color: #333; }
+.tier-gold { background-color: #ffd700; color: #333; }
+
+/* ========================================= */
+/* --- GENERAL FORM STYLES --- */
+/* (Used by Settings, Modals etc.) */
+/* ========================================= */
+/* Style for text inputs and number inputs */
+.form-input,
+.form-select {
+  background-color: #30333d; color: #e0e0e0; border: 1px solid #4a4d59;
+  border-radius: 6px; padding: 10px 14px; font-size: 1em; font-family: inherit;
+  height: 42px; /* Ensure consistent height */
+  margin: 0; /* Remove default margins */
+}
+.form-input:hover,
+.form-select:hover { border-color: #3498db; }
+.form-input:focus,
+.form-select:focus { outline: none; border-color: #3498db; }
+.form-select { flex-grow: 1; } /* Allow selects to grow if needed */
+
+/* Modal Styles (Basic Overlay + Content) */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.modal-content {
+  background-color: #23252e; border-radius: 8px; padding: 30px;
+  min-width: 350px; max-width: 90%;
+  border: 1px solid #30333d;
+}
+.modal-content h4 { margin-top: 0; font-size: 1.4em; color: #fff; margin-bottom: 20px; }
+.modal-content p { color: #a0a5b1; margin-bottom: 25px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px; }
+.btn-cancel, .btn-confirm {
+   padding: 10px 20px; font-size: 1em; font-weight: 600; border: none; border-radius: 6px; cursor: pointer;
+}
+.btn-cancel { background-color: #4a4d59; color: #e0e0e0; }
+.btn-cancel:hover { background-color: #5a5d6a; }
+.btn-confirm { background-color: #3498db; color: #fff; }
+.btn-confirm:hover { background-color: #2980b9; }
+
+/* Styles for Admin Tool (CustomerSearch) buttons */
+.btn-add, .btn-void {
+  padding: 8px 15px; font-size: 0.9em; font-weight: 500; border: none; border-radius: 6px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; margin-left: 5px; /* Adjust spacing */
+}
+.btn-add { background-color: #27ae60; color: #fff; } /* Green */
+.btn-add:hover { background-color: #229954; }
+.btn-void { background-color: #e74c3c; color: #fff; } /* Red */
+.btn-void:hover { background-color: #c0392b; }
+/* --- LOGIN PAGE STYLES (Add to App.css) --- */
+/* --- LOGIN PAGE STYLES (Update this block in App.css) --- */
+.login-page-container {
+  display: flex;
+  /* CRITICAL FIX: Align center horizontally and vertically */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use full screen height */
+  background-color: #1a1c23;
+  /* Ensure no other margins are pushing it around */
+  margin: 0;
+  padding: 0;
+}
+/* --- The rest of the login styles remain unchanged --- */
+.login-form {
+  width: 100%;
+  max-width: 380px; /* Standard login box size */
+  padding: 30px;
+  text-align: center;
+  background-color: #23252e;
+}
+.login-header {
+  margin-bottom: 25px;
+}
+.login-logo-icon {
+  font-size: 2.5rem;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+.login-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.login-form .form-group {
+    text-align: left;
+}
+.login-form .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #a0a5b1;
+}
+.login-form button[type="submit"] {
+    width: 100%;
+    margin-top: 15px;
+}
+.register-text {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-top: 20px;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.spin { animation: spin 1s linear infinite; }
+/* --- END LOGIN PAGE STYLES --- */
+
+/*
+  * Styles for the new "Create a new account" link button
+  * on the Login page
+  */
+.link-button {
+  background: none;
+  border: none;
+  color: #00aaff; /* Bright blue for the link */
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit; /* Inherit font size from the <p> tag */
+  font-family: inherit; /* Inherit font family */
+  text-decoration: underline;
+}
+
+.link-button:hover {
+  color: #0088cc; /* Darker blue on hover */
+}
+
+.login-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #1e1f24; 
+}
+/* ========================================= */
+/* --- LIGHT THEME OVERRIDES --- */
+/* ========================================= */
+
+body.light {
+  background-color: #f4f7f9; /* Light body background */
+  color: #333333; /* Dark text */
+}
+
+/* --- App Layout --- */
+.light .app-layout {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* --- Header --- */
+.light .main-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+.light .main-header h1 {
+  color: #333333;
+}
+
+/* --- Sidebar --- */
+.light .sidebar {
+  background-color: #f0f0f0;
+  border-right: 1px solid #e0e0e0;
+  color: #555;
+}
+.light .sidebar-header {
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+.light .sidebar-menu > li {
+  color: #555;
+  border-left: 4px solid transparent;
+}
+.light .sidebar-menu > li:hover,
+.light .sidebar-menu > li.active {
+  background-color: #e6e6e6;
+  color: #3498db;
+}
+.light .sidebar-menu > li.active {
+  border-left: 4px solid #3498db;
+}
+
+/* --- Submenu (Admin Tools, Reports) --- */
+.light .submenu {
+  background-color: #ffffff;
+}
+.light .submenu li:hover,
+.light .menu-item.active-parent {
+  background-color: #e6e6e6;
+}
+.light .submenu li.active-submenu {
+  color: #3498db;
+}
+
+/* --- Card Styles (Containers) --- */
+.light .card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #333333;
+}
+.light .card-header {
+  border-bottom: 1px solid #e0e0e0;
+}
+.light .card-header h3 {
+  color: #333333;
+}
+
+/* --- Dashboard Tab Buttons --- */
+.light .tab-button {
+  background-color: #e0e0e0;
+  color: #555555;
+}
+.light .tab-button.active {
+  background-color: #3498db;
+  color: #fff;
+}
+.light .tab-button:hover:not(.active) {
+  background-color: #cccccc;
+}
+
+/* --- List Items (info-card) --- */
+.light .info-card {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+}
+.light .info-card-header {
+  border-bottom: 1px solid #e0e0e0;
+}
+.light .info-card-details {
+  color: #555555;
+}
+.light .info-card-details li strong {
+  color: #333333;
+}
+.light .info-card-details li.divider {
+  background-color: #e0e0e0;
+}
+
+/* --- Form Fields / Inputs --- */
+.light .form-input,
+.light .form-select,
+.light .filter-section .form-input,
+.light .filter-section .form-select {
+  background-color: #f0f0f0;
+  border: 1px solid #cccccc;
+  color: #333333;
+}
+
+/* --- Table Styles (Report/Admin) --- */
+.light .report-table th {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+.light .report-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+.light .report-table th, 
+.light .report-table td {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* --- Buttons --- */
+.light .btn-cancel {
+  background-color: #cccccc;
+  color: #333333;
+}
+.light .btn-cancel:hover {
+  background-color: #bbbbbb;
+}
+/* ========================================= */
+/* --- LIGHT THEME OVERRIDES (FINAL FIX) --- */
+/* ========================================= */
+
+body.light {
+  background-color: #f4f7f9; /* Light body background */
+  color: #212529; /* Dark text */
+}
+
+/* --- App Layout --- */
+.light .app-layout {
+  background-color: #f4f7f9;
+  color: #212529;
+}
+
+/* --- Header --- */
+.light .main-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+}
+.light .main-header h1 {
+  color: #212529;
+}
+
+/* --- Sidebar --- */
+.light .sidebar {
+  background-color: #23252e; /* Keep sidebar dark for contrast */
+  border-right: 1px solid #30333d;
+  color: #e0e0e0;
+}
+.light .sidebar-header {
+  background-color: #23252e;
+  color: #ffffff;
+  border-bottom: 1px solid #30333d;
+}
+.light .sidebar-menu > li > div,
+.light .sidebar-menu > li {
+  color: #a0a5b1;
+}
+.light .sidebar-menu > li:hover > div,
+.light .sidebar-menu > li:hover {
+  background-color: #33363f;
+  color: #fff;
+}
+.light .sidebar-menu > li.active {
+  background-color: #33363f;
+  border-left-color: #3498db;
+  color: #fff;
+}
+.light .submenu {
+  background-color: #1e1f24;
+}
+.light .submenu li {
+  color: #a0a5b1;
+}
+.light .submenu li:hover {
+  background-color: #33363f;
+  color: #fff;
+}
+.light .submenu li.active-submenu {
+  color: #3498db;
+}
+
+/* --- Card Styles (Fixes Dashboard & Settings) --- */
+.light .card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  color: #212529;
+}
+.light .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+.light .card-header h3 {
+  color: #212529;
+}
+
+/* --- Dashboard Tab Buttons --- */
+.light .tab-button {
+  background-color: #e9ecef;
+  color: #495057;
+}
+.light .tab-button.active {
+  background-color: #3498db;
+  color: #fff;
+}
+.light .tab-button:hover:not(.active) {
+  background-color: #ced4da;
+}
+
+/* --- Dashboard Stat Cards (Fixes invisible text) --- */
+.light .stat-info .stat-label { color: #6c757d; }
+.light .stat-info .stat-big-number { color: #212529; }
+.light .stat-info .stat-subtext { color: #495057; }
+.light .created-card .stat-icon { background-color: rgba(243, 156, 18, 0.1); }
+.light .redeemed-card .stat-icon { background-color: rgba(46, 204, 113, 0.1); }
+
+
+/* --- List Items (info-card) --- */
+.light .info-card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+.light .info-card-header {
+  border-bottom: 1px solid #dee2e6;
+}
+.light .info-card-details {
+  color: #495057;
+}
+.light .info-card-details li strong {
+  color: #212529;
+}
+.light .info-card-details li.divider {
+  background-color: #e9ecef;
+}
+.light .stat-breakdown-list .list-item-small {
+  color: #212529;
+}
+.light .stat-breakdown-list .list-item-small:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+.light .stat-breakdown-list .text-muted {
+  color: #6c757d;
+}
+
+
+/* --- Form Fields / Inputs (Fixes Settings & Bulk Add) --- */
+.light .form-input,
+.light .form-select,
+.light .filter-section .form-input,
+.light .filter-section .form-select {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  color: #212529;
+}
+
+/* --- Search Bars (Fixes Header & Report pages) --- */
+.light .header-search-container .header-select__control,
+.light .dashboard-search .css-13cymwt-control,
+.light .dashboard-search .css-t3ipsp-control {
+  background-color: #ffffff;
+  border-color: #ced4da;
+}
+.light .header-search-container .header-select__single-value,
+.light .header-search-container .header-select__input {
+  color: #212529 !important;
+}
+.light .dashboard-search .css-1nmdiq5-menu {
+  background-color: #ffffff;
+}
+.light .dashboard-search .css-d7l1ni-option {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+/* --- Table Styles (Fixes all reports) --- */
+.light .report-table th, 
+.light .report-table td {
+  border-bottom: 1px solid #dee2e6;
+  color: #212529; /* <-- Fixes invisible text */
+}
+.light .report-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+.light .report-table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+.light .summary-bar {
+  background-color: #e9ecef;
+  color: #212529;
+}
+.light .summary-bar div strong {
+  color: #495057;
+}
+
+/* --- Login Page --- */
+.light .login-page-container {
+  background-color: #f4f7f9;
+}
+.light .login-form {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+}
+.light .login-form h2 {
+  color: #212529;
+}
+.light .login-form .form-group label {
+  color: #6c757d;
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Admin Tools) --- */
+/* ========================================= */
+
+/* 1. Fix all react-select (AsyncSelect) components */
+/* Targets the main control bar */
+.light .header-select__control, /* Header Search */
+.light .autocomplete-select .css-13cymwt-control, /* Admin Tool */
+.light .customer-search-select .header-select__control, /* Bulk Add */
+.light .blacklist-search-bar .blacklist-select__control /* Blacklist */ {
+    background-color: #ffffff !important;
+    border-color: #ced4da !important;
+}
+
+/* Fix text/placeholder color */
+.light .header-select__single-value,
+.light .header-select__placeholder,
+.light .autocomplete-select .css-1dimb5e-singleValue,
+.light .autocomplete-select .css-1dimb5e-placeholder,
+.light .customer-search-select .header-select__single-value,
+.light .customer-search-select .header-select__placeholder,
+.light .blacklist-select__single-value,
+.light .blacklist-select__placeholder {
+    color: #212529 !important;
+}
+
+/* Fix typed input text color */
+.light .header-select__input input,
+.light .autocomplete-select input,
+.light .customer-search-select input,
+.light .blacklist-search-bar input {
+     color: #212529 !important;
+}
+
+/* Fix dropdown menu */
+.light .header-select__menu,
+.light .autocomplete-select .css-1nmdiq5-menu,
+.light .customer-search-select .header-select__menu,
+.light .blacklist-search-bar .blacklist-select__menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+
+/* Fix dropdown options */
+.light .header-select__option,
+.light .autocomplete-select .css-d7l1ni-option,
+.light .customer-search-select .header-select__option,
+.light .blacklist-select__option {
+    background-color: #ffffff;
+    color: #212529;
+}
+.light .header-select__option--is-focused,
+.light .autocomplete-select .css-1n7v3ny-option,
+.light .customer-search-select .header-select__option--is-focused,
+.light .blacklist-select__option--is-focused {
+     background-color: #3498db !important;
+     color: #ffffff  !important;
+}
+
+
+/* 2. Fix Bulk Add "Customer List" box */
+.light .selected-customer-list {
+  border-color: #dee2e6;
+  background-color: #f8f9fa; /* Light gray background */
+}
+.light .selected-customer-list .card-header {
+  border-bottom-color: #dee2e6;
+  color: #212529; /* Dark text */
+  background-color: #f8f9fa;
+}
+.light .customer-list-item {
+    border-bottom-color: #e9ecef;
+}
+.light .customer-list-item span {
+  color: #212529; /* Dark text */
+}
+.light .selected-customer-list .card-body {
+    background-color: #ffffff; /* Make the empty list area white */
+    color: #6c757d;
+}
+
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Date Pickers & Toggles) --- */
+/* ========================================= */
+
+/* 1. Fix react-datepicker inputs (Reports/Staff Report) */
+.light .react-datepicker-wrapper input {
+    background-color: #ffffff !important;
+    border: 1px solid #ced4da !important;
+    color: #212529 !important;
+}
+
+/* 2. Fix Settings Page "Feature Control Panel" (Settings.css) */
+.light .feature-control-panel .form-group {
+    background-color: #f8f9fa; /* Light gray */
+    border-color: #dee2e6;
+}
+
+.light .feature-control-panel .form-group label {
+    color: #212529; /* Dark text */
+}
+
+.light .feature-control-panel .form-group p {
+    color: #6c757d; /* Muted text */
+}
+
+/* 3. Fix Settings Page Toggles (if they are dark) */
+.light .toggle-btn:not(.enabled) {
+  background-color: #e9ecef; /* Light gray background */
+  color: #495057; /* Dark text */
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Sidebar) --- */
+/* ========================================= */
+
+/* 1. Main Sidebar Container */
+.light .sidebar {
+  background-color: #f8f9fa; /* Light background */
+  border-right: 1px solid #dee2e6;
+  color: #212529; /* Dark text */
+}
+
+/* 2. Sidebar Header (Logo/Title) */
+.light .sidebar-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  color: #212529; /* Dark text */
+}
+.light .sidebar-header svg {
+  color: #007bff; /* Keep logo icon blue */
+}
+
+
+/* 3. Menu Links (e.g., Dashboard, Settings) */
+.light .sidebar-menu > li > div,
+.light .sidebar-menu > li { 
+  color: #495057; /* Darker grey text */
+}
+
+/* 4. Hover/Active Parent Link */
+.light .sidebar-menu > li:hover > div,
+.light .sidebar-menu > li:hover {
+  background-color: #e9ecef; /* Light hover */
+  color: #007bff; /* Blue text on hover */
+}
+
+/* 5. Active Top-level Link */
+.light .sidebar-menu > li.active {
+  background-color: #e9ecef;
+  border-left: 4px solid #007bff;
+  color: #007bff; /* Blue text when active */
+  font-weight: 600;
+}
+
+/* 6. Chevron Arrow */
+.light .chevron {
+  color: #6c757d;
+}
+
+/* 7. Submenu Container */
+.light .submenu {
+  background-color: #ffffff; /* White background for submenu */
+}
+
+/* 8. Submenu Links */
+.light .submenu li {
+  color: #495057;
+}
+.light .submenu li:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+/* 9. Active Submenu Item */
+.light .submenu li.active-submenu {
+    color: #007bff; 
+    font-weight: 600;
+}
+
+/* 10. Active Parent (when submenu item is active) */
+.light .menu-item.active-parent {
+  background-color: #e9ecef;
+  border-left: 4px solid #007bff;
+  color: #007bff;
+  font-weight: 600;
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Admin Tool Search) --- */
+/* ========================================= */
+
+/* 1. Fix the 'Admin Tool' AsyncSelect component */
+.light .autocomplete-select .css-13cymwt-control,
+.light .autocomplete-select .css-t3ipsp-control {
+  background-color: #ffffff !important;
+  border: 1px solid #ced4da !important;
+  color: #212529;
+}
+
+/* 2. Fix the text/placeholder color */
+.light .autocomplete-select .css-1dimb5e-singleValue,
+.light .autocomplete-select .css-1dimb5e-placeholder {
+    color: #212529 !important;
+}
+
+/* 3. Fix the dropdown menu */
+.light .autocomplete-select .css-1nmdiq5-menu {
+  background-color: #ffffff !important;
+  border: 1px solid #dee2e6;
+}
+
+/* 4. Fix dropdown options */
+.light .autocomplete-select .css-d7l1ni-option {
+  background-color: #ffffff;
+  color: #212529;
+}
+.light .autocomplete-select .css-1n7v3ny-option {
+   background-color: #3498db !important;
+   color: #ffffff !important;
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Settings & Admin Dropdown) --- */
+/* ========================================= */
+
+/* 1. Fix Settings Page - Restore Bold Headers & Labels */
+.light .settings-page .card-header h3,
+.light .settings-page .form-group label {
+    font-weight: 600; /* Restore bold weight */
+    color: #212529; /* Ensure dark text */
+}
+
+.light .settings-page .form-group p {
+    color: #6c757d; /* Muted text */
+}
+
+/* 2. Fix Admin Tool - Dropdown Menu & Options */
+/* This overrides the dark dropdown menu */
+.light .autocomplete-select .css-1nmdiq5-menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+
+/* This fixes the dropdown options */
+.light .autocomplete-select .css-d7l1ni-option {
+  background-color: #ffffff;
+  color: #212529;
+}
+.light .autocomplete-select .css-1n7v3ny-option {
+   background-color: #3498db !important;
+   color: #ffffff !important;
+}
+
+/* 3. Fix Settings Page - Feature Panel Text (was too light) */
+.light .feature-control-panel .form-group label {
+    color: #212529;
+}
+.light .feature-control-panel .form-group p {
+    color: #6c757d;
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Customer Dashboard) --- */
+/* ========================================= */
+
+/* 1. Fix Customer Info text (Contact, Balance Points, etc.) */
+.light .customer-info .detail-row strong {
+    color: #6c757d; /* Muted text */
+}
+.light .customer-info .detail-row span {
+    color: #212529; /* Dark text */
+}
+
+/* 2. Fix "Available Coupons" card */
+.light .coupon-list-container {
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #dee2e6;
+}
+.light .coupon-list-container h3 {
+    color: #212529; /* Dark text */
+    border-bottom: 1px solid #dee2e6;
+}
+.light .scrollable-coupon-list p {
+    color: #6c757d; /* Muted text */
+}
+.light .info-card.coupon-list-item {
+     background-color: #ffffff;
+     border-color: #dee2e6;
+}
+.light .info-card.coupon-list-item .info-card-header strong {
+     color: #212529;
+}
+.light .expiry-warning {
+    color: #6c757d;
+}
+.light .expiry-warning.visible {
+  color: #d9534f; /* Bootstrap's danger red */
+}
+
+
+/* 3. Fix "Add to Redemption Cart" title */
+.light .redeem-container.cart-style h3 {
+    color: #212529; /* Dark text */
+}
+
+/* 4. Fix "Handled By?" dropdown (it's a .form-select) */
+.light .customer-dashboard .form-select {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    color: #212529;
+}
+
+/* 5. Fix "Bulk Add" AsyncSelect (again, for good measure) */
+.light .customer-search-select .header-select__control {
+    background-color: #ffffff !important;
+    border-color: #ced4da !important;
+}
+.light .customer-search-select .header-select__single-value,
+.light .customer-search-select .header-select__placeholder {
+    color: #212529 !important;
+}
+.light .customer-search-select .header-select__menu {
+    background-color: #ffffff !important;
+}
+.light .customer-search-select .header-select__option {
+    background-color: #ffffff;
+    color: #212529;
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Customer Dashboard Final) --- */
+/* ========================================= */
+
+/* 1. Fix Customer Info text (Contact, Balance Points, etc.) */
+.light .customer-dashboard .card-header h2 {
+    color: #212529; /* Dark text for "Customer: shiva" */
+}
+.light .customer-info .detail-row strong {
+    color: #6c757d; /* Muted text */
+}
+.light .customer-info .detail-row span {
+    color: #212529; /* Dark text */
+}
+
+/* 2. Fix "Available Coupons" card (if still dark) */
+.light .coupon-list-container {
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #dee2e6;
+}
+.light .coupon-list-container h3 {
+    color: #212529; /* Dark text */
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* 3. Fix "Add to Redemption Cart" title */
+.light .redeem-container.cart-style h3 {
+    color: #212529; /* Dark text */
+}
+
+/* 4. Fix "Purchase" and "Gift" buttons */
+.light .add-cart-btn {
+  background-color: #f8f9fa; /* Light background */
+  color: #212529; /* Dark text */
+  border: 1px solid #dee2e6;
+}
+.light .add-cart-btn:hover {
+  background-color: #e2e6ea;
+}
+
+
+/* 5. Fix "Redemption Cart" card */
+.light .cart-summary {
+    background-color: #f8f9fa !important; /* Light background */
+    border: 1px solid #dee2e6 !important;
+}
+.light .cart-summary h4 {
+    color: #212529; /* Dark text */
+    border-bottom: 1px solid #dee2e6;
+}
+.light .cart-summary .cart-item {
+    color: #212529; /* Dark text */
+}
+.light .cart-summary .cart-total {
+    color: #212529; /* Dark text */
+}
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Settings Inputs) --- */
+/* ========================================= */
+
+/* This now applies to ALL cards in the settings page */
+.light .settings-horizontal-layout .card-header h3 {
+    color: #212529;
+}
+.light .settings-horizontal-layout .card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    color: #212529;
+}
+.light .settings-horizontal-layout .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+.light .settings-horizontal-layout .form-group label {
+    color: #212529;
+    font-weight: 600;
+}
+.light .settings-horizontal-layout .form-group p {
+    color: #6c757d;
+}
+.light .settings-horizontal-layout .form-input,
+.light .settings-horizontal-layout .form-select {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  color: #212529;
+}
+
+/* ========================================= */
+/* --- LIGHT MODE HOTFIX (Settings & Admin Dropdown) --- */
+/* ========================================= */
+
+/* 1. Fix Settings Page - Restore Bold Headers & Labels */
+.light .settings-page .card-header h3,
+.light .settings-page .form-group label {
+    font-weight: 600; /* Restore bold weight */
+    color: #212529; /* Ensure dark text */
+}
+
+.light .settings-page .form-group p {
+    color: #6c757d; /* Muted text */
+}
+
+/* 2. Fix Admin Tool - Dropdown Menu & Options */
+/* This overrides the dark dropdown menu */
+.light .autocomplete-select .css-1nmdiq5-menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+
+/* This fixes the dropdown options */
+.light .autocomplete-select .css-d7l1ni-option {
+  background-color: #ffffff;
+  color: #212529;
+}
+.light .autocomplete-select .css-1n7v3ny-option {
+   background-color: #3498db !important;
+   color: #ffffff !important;
+}
+
+/* 3. Fix Settings Page - Feature Panel Text (was too light) */
+.light .feature-control-panel .form-group label {
+    color: #212529;
+}
+.light .feature-control-panel .form-group p {
+    color: #6c757d;
+}
+/* ========================================= */
+/* --- GLOBAL HEADER SEARCH BAR STYLES --- */
+/* ========================================= */
+
+/* --- DARK MODE (Your original inline styles) --- */
+body.dark .header-select__control {
+    background-color: #1e1f24 !important;
+    border-color: #4a4d59 !important;
+}
+body.dark .header-select__single-value,
+body.dark .header-select__placeholder,
+body.dark .header-select__input-container {
+    color: #ffffff !important;
+}
+body.dark .header-select__menu {
+    background-color: #1e1f24 !important;
+}
+body.dark .header-select__option {
+    background-color: #1e1f24;
+    color: #ffffff;
+    cursor: pointer;
+}
+body.dark .header-select__option--is-focused {
+    background-color: #3a3d47;
+}
+
+/* --- LIGHT MODE (The Fix) --- */
+body.light .header-select__control {
+    background-color: #ffffff !important;
+    border-color: #ced4da !important;
+}
+body.light .header-select__single-value,
+body.light .header-select__placeholder,
+body.light .header-select__input-container {
+    color: #212529 !important;
+}
+body.light .header-select__menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+body.light .header-select__option {
+    background-color: #ffffff;
+    color: #212529;
+    cursor: pointer;
+}
+body.light .header-select__option--is-focused {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+/* ========================================= */
+/* --- GLOBAL HEADER SEARCH BAR STYLES --- */
+/* ========================================= */
+
+/* --- Base Size (Static Width) --- */
+.header-search-container .header-select__control {
+    min-width: 350px !important; /* Static width */
+    width: 350px !important;
+}
+
+/* --- DARK MODE (Your original inline styles) --- */
+body.dark .header-select__control {
+    background-color: #1e1f24 !important;
+    border-color: #4a4d59 !important;
+}
+body.dark .header-select__single-value,
+body.dark .header-select__placeholder,
+body.dark .header-select__input-container {
+    color: #ffffff !important;
+}
+body.dark .header-select__menu {
+    background-color: #1e1f24 !important;
+}
+body.dark .header-select__option {
+    background-color: #1e1f24;
+    color: #ffffff;
+    cursor: pointer;
+}
+body.dark .header-select__option--is-focused {
+    background-color: #3a3d47;
+}
+
+/* --- LIGHT MODE (The Fix) --- */
+body.light .header-select__control {
+    background-color: #ffffff !important;
+    border-color: #ced4da !important;
+}
+body.light .header-select__single-value,
+body.light .header-select__placeholder,
+body.light .header-select__input-container {
+    color: #212529 !important;
+}
+body.light .header-select__menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+body.light .header-select__option {
+    background-color: #ffffff;
+    color: #212529;
+    cursor: pointer;
+}
+body.light .header-select__option--is-focused {
+    background-color: #3498db;
+    color: #ffffff;
+}
+/* ========================================= */
+/* DARK MODE FIX FOR MERGE TOOL SELECT BOXES */
+/* ========================================= */
+
+body.dark .merge-select__control {
+    background-color: #1e1f24 !important;
+    border-color: #4a4d59 !important;
+}
+
+body.dark .merge-select__value-container {
+    background-color: #1e1f24 !important;
+}
+
+body.dark .merge-select__single-value,
+body.dark .merge-select__placeholder {
+    color: #e0e0e0 !important;
+}
+
+body.dark .merge-select__input-container,
+body.dark .merge-select__input-container input {
+    color: #ffffff !important;
+}
+
+body.dark .merge-select__menu {
+    background-color: #2a2d35 !important;
+    border: 1px solid #4a4d59 !important;
+}
+
+body.dark .merge-select__option {
+    background-color: #2a2d35 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark .merge-select__option--is-focused {
+    background-color: #3498db !important;
+    color: #ffffff !important;
+}
+
+body.dark .merge-select__indicator {
+    color: #e0e0e0 !important;
+}
+
+body.dark .merge-select__indicator-separator {
+    display: none !important;
+}
+
+/* --- LIGHT MODE: Danger Zone --- */
+.light .danger-zone-card {
+  border-color: #dc3545 !important;
+}
+.light .danger-zone-card .form-group {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+.light .danger-zone-card .form-group label {
+  color: #212529;
+}
+.light .danger-zone-card .form-group p {
+  color: #6c757d;
+}

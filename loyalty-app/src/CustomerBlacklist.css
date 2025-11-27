@@ -1,0 +1,71 @@
+/*
+ * This file styles the new CustomerBlacklist.js page
+ * It re-uses .report-page, .card, .report-table, etc.
+ */
+
+.add-blacklist-card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-blacklist-form {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Search bar takes up space, button fits content */
+  gap: 15px;
+  align-items: start;
+}
+
+/* Style the react-select component */
+.blacklist-search-bar {
+  width: 100%;
+}
+
+.blacklist-search-bar .blacklist-select__control {
+  background-color: #1e1f24;
+  border-color: #4a4d59;
+  color: #e0e0e0;
+  font-size: 0.95em;
+  padding: 4px;
+}
+
+.blacklist-search-bar .blacklist-select__placeholder {
+  color: #a0a5b1;
+}
+
+.blacklist-search-bar .blacklist-select__single-value {
+  color: #e0e0e0;
+}
+
+.blacklist-search-bar .blacklist-select__menu {
+  background-color: #2c2f38;
+  z-index: 10;
+}
+
+.blacklist-search-bar .blacklist-select__option {
+  background-color: #2c2f38;
+  color: #e0e0e0;
+  cursor: pointer;
+}
+
+.blacklist-search-bar .blacklist-select__option--is-focused {
+  background-color: #007bff;
+  color: white;
+}
+
+.blacklist-search-bar .blacklist-select__input-container {
+  color: #e0e0e0;
+}
+
+/* Style the add button */
+.add-blacklist-form .tab-button.active {
+  padding: 10px 20px;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+/* Re-use the 'btn-void' style for re-enabling */
+.blacklist-page .actions-cell .btn-void {
+  font-size: 0.9em;
+  padding: 8px 12px;
+}

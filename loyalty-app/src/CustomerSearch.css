@@ -1,0 +1,84 @@
+/* --- Base Styles (Shared) --- */
+.history-search-bar {
+  display: flex;
+  gap: 15px;
+}
+.history-select {
+  flex-grow: 1;
+}
+.history-results h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #30333d;
+  padding-bottom: 15px;
+}
+.no-history {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  padding: 40px;
+}
+.history-search-bar .autocomplete-select {
+    flex-grow: 1;
+}
+
+/* ========================================= */
+/* --- DARK MODE STYLES --- */
+/* ========================================= */
+
+body.dark .autocomplete-select .css-13cymwt-control,
+body.dark .autocomplete-select .css-t3ipsp-control {
+    background-color: #30333d !important;
+    border-color: #4a4d59 !important;
+}
+body.dark .autocomplete-select .css-1nmdiq5-menu { 
+    background-color: #2a2d35 !important;
+    border: 1px solid #4a4d59;
+}
+body.dark .autocomplete-select .css-d7l1ni-option {
+    color: #e0e0e0 !important;
+    background-color: #2a2d35 !important;
+}
+body.dark .autocomplete-select .css-1n7v3ny-option {
+    background-color: #3498db !important; 
+    color: #ffffff !important;
+}
+body.dark .autocomplete-select .css-1dimb5e-singleValue,
+body.dark .autocomplete-select .css-1dimb5e-placeholder,
+body.dark .autocomplete-select input {
+    color: #e0e0e0 !important;
+}
+
+/* ========================================= */
+/* --- LIGHT MODE STYLES (The Fix) --- */
+/* ========================================= */
+
+body.light .history-results h3 {
+  border-bottom-color: #dee2e6;
+}
+body.light .no-history {
+  color: #6c757d;
+}
+
+body.light .autocomplete-select .css-13cymwt-control,
+body.light .autocomplete-select .css-t3ipsp-control {
+    background-color: #ffffff !important;
+    border-color: #ced4da !important;
+}
+body.light .autocomplete-select .css-1nmdiq5-menu { 
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6;
+}
+body.light .autocomplete-select .css-d7l1ni-option {
+    color: #212529 !important;
+    background-color: #ffffff !important;
+}
+body.light .autocomplete-select .css-1n7v3ny-option {
+    background-color: #3498db !important; 
+    color: #ffffff !important;
+}
+body.light .autocomplete-select .css-1dimb5e-singleValue,
+body.light .autocomplete-select .css-1dimb5e-placeholder,
+body.light .autocomplete-select input {
+    color: #212529 !important;
+}

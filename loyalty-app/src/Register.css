@@ -1,0 +1,31 @@
+/*
+ * This file styles the new Register.js component
+ * It re-uses styles from App.css (like .login-page-container, .card)
+ * but adds specific styles for the register form.
+ */
+
+/* Make the register form a bit wider than the login form */
+.login-form.register-form {
+  max-width: 450px;
+}
+
+/* Style for the 'Back to Login' button */
+.btn-void.back-to-login {
+  background: transparent;
+  color: #a0a5b1;
+  border: 1px solid #4a4d59;
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.btn-void.back-to-login:hover {
+  background: #33363f;
+  color: #fff;
+  border-color: #666;
+}
+
+.btn-void.back-to-login svg {
+  margin-right: 8px;
+}

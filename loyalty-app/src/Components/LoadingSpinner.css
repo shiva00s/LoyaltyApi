@@ -1,0 +1,52 @@
+/* LoadingSpinner.css */
+
+.loading-spinner-overlay {
+  /* Optional: Center the spinner on the screen or within its container */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* Give it some minimum height */
+  width: 100%;
+  text-align: center;
+  color: #a0a5b1; /* Light text color */
+}
+
+.loading-spinner {
+  display: flex; /* Aligns dots horizontally */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px; /* Space between spinner and text */
+}
+
+/* Simple three-dot animation */
+.loading-spinner div {
+  width: 12px;
+  height: 12px;
+  background-color: #6c757d; /* Spinner color */
+  border-radius: 50%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  margin: 0 4px; /* Space between dots */
+}
+
+.loading-spinner .dot1 {
+  animation-delay: -0.32s;
+}
+
+.loading-spinner .dot2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}
+
+.loading-message {
+  font-size: 1.1em;
+  font-weight: 500;
+}

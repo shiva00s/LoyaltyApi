@@ -1,0 +1,47 @@
+/*
+ * This file styles the new StaffManagement.js page
+ * It re-uses .report-page, .card, .report-table, etc. from App.css and Report.css
+ */
+
+/* Style for the toggle button inside the table */
+.staff-management-page .actions-cell .toggle-btn {
+  font-size: 0.9em;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  width: 110px; /* Give a fixed width so it doesn't jump */
+  justify-content: center;
+}
+
+.staff-management-page .actions-cell .toggle-btn.enabled {
+  background-color: #28a745;
+  color: white;
+}
+
+.staff-management-page .actions-cell .toggle-btn:not(.enabled) {
+  background-color: #4a4d59;
+  color: #e0e0e0;
+}
+
+.staff-management-page .actions-cell .toggle-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Style for the status badges */
+.staff-management-page .status-badge.enabled {
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.staff-management-page .status-badge.disabled {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}

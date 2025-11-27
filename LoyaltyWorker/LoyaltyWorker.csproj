@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-LoyaltyWorker-65d016f5-a121-4333-989f-d443e395c197</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="FluentAssertions" Version="8.8.0" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.21" />
+    
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" /> 
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\LoyaltyAPI\LoyaltyAPI.csproj" ExcludeAssets="contentfiles" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,171 @@
+/* --- Main Sidebar Container --- */
+.sidebar {
+  width: 240px;
+  background-color: #252830;
+  border-right: 1px solid #4a4d59;
+  /* Removed height: 100vh; to allow App.css to control scroll */
+  display: flex;
+  flex-direction: column;
+  color: #e0e0e0;
+}
+
+/* --- Sidebar Header (Logo/Title) --- */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Reduced gap slightly */
+  padding: 16px 18px; /* Reduced vertical padding slightly */
+  font-size: 1.25em;
+  font-weight: 600;
+  border-bottom: 1px solid #4a4d59;
+  color: #fff;
+  /* Add fixed height and center alignment to prevent logo wrapping issue */
+  height: 60px; 
+  box-sizing: border-box;
+}
+
+.sidebar-header svg {
+  color: #00aaff;
+  font-size: 1.5em;
+}
+
+/* --- Main Menu List --- */
+.sidebar-menu {
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* --- Menu Item Styles (Applies to links and submenu containers) --- */
+
+/* Base style for all list items */
+.sidebar-menu > li {
+  padding: 0; 
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s, border-left 0.2s;
+}
+
+/* Style for single links and the menu-item div */
+.sidebar-menu > li > div,
+.sidebar-menu > li { 
+  padding: 14px 18px; /* Reduced right padding to give text more space */
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Reduced gap */
+  cursor: pointer;
+  font-size: 1.05em;
+  font-weight: 500;
+  color: #a0a5b1;
+  transition: background-color 0.2s;
+}
+
+/* Hover/Active Parent Link */
+.sidebar-menu > li:hover > div,
+.sidebar-menu > li:hover {
+  background-color: #33363f;
+  color: #fff;
+}
+
+/* Active top-level links (Dashboard, Promotions, Settings) */
+.sidebar-menu > li.active {
+  background-color: #33363f;
+  border-left: 4px solid #007bff;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --- ICON ALIGNMENT FIX --- */
+.sidebar-menu svg {
+  font-size: 1.1em;
+  width: 20px; 
+  text-align: center;
+  /* Added margin-left/right to icons inside submenu links */
+}
+
+/* --- SUBMENU STYLES --- */
+
+/* Active Parent (when a submenu item inside is active) */
+.menu-item.active-parent {
+  background-color: #33363f;
+  border-left: 4px solid #007bff;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Chevron (down arrow) styling */
+.chevron {
+  font-size: 0.8em;
+  color: #a0a5b1;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate chevron when menu is open */
+.menu-item.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* --- The Submenu List Itself --- */
+.submenu {
+  list-style: none;
+  padding: 0 0 10px 0;
+  margin: 0;
+  background-color: #1e1f24; 
+  overflow: hidden;
+  max-height: 0; 
+  transition: max-height 0.3s ease-in-out;
+}
+
+.menu-item.open + .submenu {
+    max-height: 500px; 
+}
+
+.submenu li {
+  padding: 12px 18px 12px 40px; /* Reduced indent padding for space */
+  cursor: pointer;
+  color: #a0a5b1;
+  font-size: 0.9em; /* Reduced font size for submenu links */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.submenu li:hover {
+  background-color: #33363f;
+  color: #fff;
+}
+
+/* Active Submenu Item */
+.submenu li.active-submenu {
+    color: #007bff; 
+    font-weight: 600;
+}
+
+/* --- Admin Tools Separator --- */
+/* (We are not using the separator in the submenu version, but keeping the old style) */
+.sidebar-separator {
+  padding: 15px 20px 5px !important;
+  font-size: 0.8em !important;
+  font-weight: 700;
+  color: #6c757d !important;
+  cursor: default !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+/* --- FIX: Stop sidebar width from changing on click --- */
+.sidebar-menu span {
+  white-space: nowrap;     /* Prevent text from wrapping to a new line */
+  overflow: hidden;        /* Hide any text that goes outside the box */
+  text-overflow: ellipsis; /* Show '...' if the text is too long */
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;            /* This is the key: allows the text to shrink */
+}
+
+/* Styles for the new chevron (arrow icon) */
+.sidebar-menu .chevron {
+  flex-shrink: 0;
+  margin-left: auto; /* Pushes it to the far right */
+}

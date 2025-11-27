@@ -1,0 +1,257 @@
+/* --- CustomerDashboard.css --- */
+
+/* This makes the main card fill the available screen space */
+.customer-dashboard.card {
+  flex-grow: 1; /* Expands to fill .content-area */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents the card itself from scrolling */
+  margin-bottom: 0; /* Remove default margin */
+}
+
+/* Styles specific to the customer dashboard card header */
+.customer-dashboard .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #30333d;
+  padding: 20px 25px;
+  flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.customer-dashboard .card-header h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #95a5a6;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.clear-btn:hover {
+  color: #e74c3c; /* Red on hover */
+  background-color: #443034; /* Dark red background */
+}
+
+/* --- NEW: 2-Column Grid Layout for the card body --- */
+.customer-dashboard-body-grid {
+  display: flex;
+  flex-grow: 1; /* Makes the grid fill the card */
+  overflow: hidden; /* IMPORTANT: Prevents this grid from scrolling */
+  gap: 25px;
+  padding: 20px 25px 25px 25px;
+}
+
+.customer-dashboard-left-col {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto; /* Allow this column to scroll ONLY if screen is very short */
+}
+
+.customer-dashboard-right-col {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* This column does not scroll */
+}
+/* --- END: 2-Column Grid --- */
+
+
+/* Customer Details Layout (in left column) */
+.customer-info {
+  flex-shrink: 0; /* Prevent this from shrinking */
+}
+
+.detail-row {
+  font-size: 1rem;
+  padding: 10px 0;
+  display: flex;
+  border-bottom: 1px dashed #30333d;
+}
+.detail-row:last-child { border-bottom: none; }
+
+.detail-row strong {
+  min-width: 140px;
+  color: #a0a5b1;
+  font-weight: 500;
+}
+.detail-row span {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Customer Header (Name + Tier Badge) */
+.customer-header-info {
+    display: flex;
+    align-items: center; /* Vertically align name and badge */
+}
+.customer-header-info h2 {
+    margin: 0; /* Remove default margin */
+}
+
+/* --- Coupon List (in right column) --- */
+.coupon-list-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* IMPORTANT: Makes list grow to fill space */
+  overflow: hidden; /* This container does not scroll */
+  border: 1px solid #30333d; 
+  border-radius: 6px;
+  background-color: #1a1c23; 
+  margin-bottom: 20px; /* Space between list and cart */
+}
+
+.coupon-list-container h3 {
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  padding: 15px 20px;
+  border-bottom: 1px solid #30333d;
+  flex-shrink: 0;
+}
+
+/* CRITICAL: This makes ONLY the list scrollable */
+.scrollable-coupon-list {
+  flex-grow: 1; /* Takes up remaining height */
+  overflow-y: auto; /* Allows scrolling ONLY in the list area */
+  padding: 10px 15px 15px 15px; 
+}
+
+.coupon-list-item {
+  margin-bottom: 8px; /* Spacing between items in the list */
+}
+
+/* Expiry Warning Styles */
+.expiry-warning {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #a0a5b1; /* Muted color by default */
+}
+
+.expiry-warning.visible {
+  color: #e74c3c; /* Red warning color */
+  font-weight: 600;
+}
+/* --- END: Coupon List --- */
+
+
+/* --- Cart Style Redeem Section (in left column) --- */
+.redeem-container.cart-style {
+  padding: 0; 
+}
+
+.redeem-container.cart-style h3 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.add-buttons-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px; 
+}
+
+.add-cart-btn {
+  flex-grow: 1; 
+  justify-content: center; 
+}
+
+/* --- Cart Summary Styling (now in right column) --- */
+.cart-summary {
+  flex-shrink: 0; /* IMPORTANT: Prevents cart from being squished */
+  margin-top: 0; 
+  padding: 15px;
+  background-color: #2a2d35;
+  border: 1px solid #4a4d59;
+  border-radius: 6px;
+  margin-bottom: 0; /* No bottom margin */
+}
+
+.cart-summary h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #4a4d59;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px; /* Space before total */
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.cart-item span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remove-item-btn { 
+  background: none;
+  border: none;
+  color: #e74c3c; 
+  cursor: pointer;
+  font-size: 1.1em;
+  padding: 5px; 
+  line-height: 1; 
+}
+.remove-item-btn:hover { color: #c0392b; } 
+
+.remove-item-btn.small-btn {
+  padding: 3px 6px; 
+  font-size: 0.9em; 
+}
+
+.cart-total {
+  margin-top: 0; 
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #e0e0e0;
+  text-align: right;
+}
+
+/* Horizontal Divider */
+hr.divider {
+  border: none;
+  border-top: 1px solid #4a4d59;
+  margin: 20px 0;
+}
+
+/* Finalize Form Layout (in left column) */
+.finalize-form {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.finalize-form .form-select {
+  flex-grow: 0; 
+  min-width: 150px; 
+}

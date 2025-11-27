@@ -1,0 +1,187 @@
+/* ====================================================== */
+/* 🔔 BASE (Structure + layout – applies to both themes)  */
+/* ====================================================== */
+
+.notif-wrapper {
+    position: relative;
+}
+
+.notif-bell {
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.notif-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    padding: 2px 5px;
+}
+
+/* Shake animation */
+@keyframes shakeBell {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.shake {
+    animation: shakeBell 0.7s ease;
+}
+
+/* Notification Panel */
+.notif-panel {
+    position: absolute;
+    top: 34px;
+    right: -10px;
+    width: 260px;
+    border-radius: 8px;
+    padding: 0;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.notif-header {
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-body {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.notif-item {
+    padding: 10px;
+}
+
+.notif-item:last-child {
+    border-bottom: none;
+}
+
+.notif-text {
+    font-size: 14px;
+}
+
+.notif-time {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.notif-empty {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.notif-clear {
+    background: none;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+/* ====================================================== */
+/* 🌙 DARK MODE OVERRIDES (Exact look you already had)    */
+/* ====================================================== */
+
+body.dark .notif-bell {
+    color: #f1c40f !important;
+}
+
+body.dark .notif-panel {
+    background: #1f232d !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+body.dark .notif-header {
+    border-bottom: 1px solid #444 !important;
+    color: #ffffff !important;
+}
+
+body.dark .notif-item {
+    border-bottom: 1px solid #333 !important;
+    color: #ffffff !important;
+}
+
+body.dark .notif-text {
+    color: #ffffff !important;
+}
+
+body.dark .notif-time {
+    color: #cccccc !important;
+}
+
+body.dark .notif-empty {
+    color: #aaaaaa !important;
+}
+
+body.dark .notif-clear {
+    color: #ff4444 !important;
+}
+
+
+/* ====================================================== */
+/* ☀️ LIGHT MODE OVERRIDES (Fixes invisible text issue)   */
+/* ====================================================== */
+
+body.light .notif-bell {
+    color: #f1c40f !important;
+}
+
+body.light .notif-panel {
+    background: #ffffff !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+body.light .notif-header {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+body.light .notif-item {
+    border-bottom: 1px solid #e9ecef !important;
+    color: #212529 !important;
+}
+
+body.light .notif-text {
+    color: #212529 !important;
+}
+
+body.light .notif-time {
+    color: #6c757d !important;
+    opacity: 1 !important;
+}
+
+body.light .notif-empty {
+    color: #6c757d !important;
+    opacity: 1 !important;
+}
+
+body.light .notif-clear {
+    color: #dc3545 !important;
+}
+body.light .notif-clear:hover {
+    color: #a71d2a !important;
+}

@@ -1,0 +1,113 @@
+/* --- NEW: Bulk Add Coupon Page Styles --- */
+
+.bulk-add-page .form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Make the customer list builder stick together */
+.customer-list-builder {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Make the search bar fill the space */
+.customer-list-builder .customer-search-select {
+  flex-grow: 1;
+}
+
+/* Style the "Add" button */
+.customer-list-builder .tab-button {
+  padding: 10px 15px;
+  white-space: nowrap; /* Stop "Add" text from wrapping */
+}
+
+/* --- THIS IS THE FIX for SEARCH BOX STYLING --- */
+
+/* NEW: Styles the main search box container */
+.customer-search-select .header-select__control {
+  background-color: #1e1f24; /* Dark background */
+  border: 1px solid #4a4d59; /* Matching border */
+  box-shadow: none; /* Removes default glow */
+  min-height: 40px; /* Match height of other inputs */
+}
+
+/* Makes the dropdown arrow light */
+.customer-search-select .header-select__control:hover {
+  border-color: #4a4d59;
+}
+
+.customer-search-select .header-select__menu {
+  background-color: #2c2f38;
+  z-index: 20;
+}
+.customer-search-select .header-select__option {
+  background-color: #2c2f38;
+  color: #e0e0e0; 
+  cursor: pointer;
+}
+.customer-search-select .header-select__option--is-focused {
+  background-color: #007bff;
+  color: white;
+}
+
+/* This styles the text you are typing */
+.customer-search-select .header-select__input-container {
+  color: #e0e0e0; /* <-- CHANGED BACK to light color */
+}
+
+/* NEW: This styles the placeholder text */
+.customer-search-select .header-select__placeholder {
+  color: #8a8d97; /* Light grey for placeholder */
+}
+
+/* NEW: This styles the selected value */
+.customer-search-select .header-select__single-value {
+  color: #e0e0e0; /* Light color for selected item */
+}
+
+/* NEW: This styles the dropdown arrow */
+.customer-search-select .header-select__indicator {
+  color: #e0e0e0; /* Light color for arrow */
+}
+
+/* NEW: This hides the separator line next to the arrow */
+.customer-search-select .header-select__indicator-separator {
+  display: none; 
+}
+/* --- END OF SEARCH FIX --- */
+
+
+/* Style the list of selected customers */
+.selected-customer-list {
+  border: 1px solid #4a4d59;
+  border-radius: 6px;
+  background-color: #1e1f24;
+}
+.selected-customer-list .card-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid #4a4d59;
+}
+/* --- THIS FIXES THE MISSING BUTTON --- */
+.selected-customer-list .scrollable-list {
+  max-height: 180px; /* Gives the list a max height so it scrolls */
+  overflow-y: auto;
+}
+/* --- END OF MISSING BUTTON FIX --- */
+
+.customer-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #3a3f47;
+}
+.customer-list-item:last-child {
+  border-bottom: none;
+}
+.customer-list-item span {
+  font-size: 0.9em;
+  color: #e0e0e0;
+}

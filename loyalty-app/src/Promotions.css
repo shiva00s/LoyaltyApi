@@ -1,0 +1,107 @@
+/* --- Styles for the Promotions Page Header --- */
+.promotions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.promotions-header h2 {
+  margin: 0;
+}
+
+/* --- Styles for the Modal Form --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+/* Use existing .form-input style */
+.form-group .form-input {
+  width: 100%;
+}
+
+/* For side-by-side inputs */
+.form-group-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+/* --- Styles for Toggle Button --- */
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background-color: #4a4d59;
+  color: #e0e0e0;
+  height: 42px; /* Match input height */
+  width: 100%;
+  justify-content: center;
+}
+
+.toggle-btn.enabled {
+  background-color: #27ae60; /* Green */
+  color: #fff;
+}
+
+/* --- Styles for the table list --- */
+.status-badge {
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.status-badge.enabled {
+  background-color: #27ae60; /* Green */
+}
+
+.status-badge.disabled {
+  background-color: #7f8c8d; /* Grey */
+  color: #333;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit, .btn-delete {
+  background: none;
+  border: 1px solid #4a4d59;
+  color: #a0a5b1;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.btn-edit:hover {
+  border-color: #3498db;
+  color: #3498db;
+}
+
+.btn-delete:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}

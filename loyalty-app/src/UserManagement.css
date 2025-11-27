@@ -1,0 +1,114 @@
+/* UserManagement.css */
+
+/* Inherit general table styles from Report.css or App.css if possible */
+.user-management-page .report-table-card {
+  margin-top: 20px;
+}
+
+/* Specific styles for User Management */
+.role-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.role-admin {
+  background-color: #dc3545; /* Red for admin */
+}
+
+.role-staff {
+  background-color: #007bff; /* Blue for staff */
+}
+
+/* Re-use status badge styles if already defined, otherwise: */
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.status-badge.enabled {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+
+.status-badge.disabled {
+  background-color: #6c757d; /* Gray */
+  color: white;
+}
+
+/* Ensure modal styles from other components don't clash or reuse them */
+/* If reusing modal styles, you might not need the modal CSS here */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #2c2f38; /* Match card background */
+  padding: 25px;
+  border-radius: 8px;
+  min-width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-content h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Styles for toggle button */
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid #6c757d;
+  background-color: #495057;
+  color: #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.toggle-btn.enabled {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.toggle-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Spin animation for save button */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}

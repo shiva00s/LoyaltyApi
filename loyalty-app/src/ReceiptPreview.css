@@ -1,0 +1,146 @@
+/* --- NEW: Shop Header Styles --- */
+.receipt-shop-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 2px dashed #333; /* Dashed line separator */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #000; /* Color for printing */
+}
+
+.receipt-shop-header strong {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.receipt-shop-header span {
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.receipt-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.receipt-modal-content {
+  background-color: #f4f4f4; /* Light background for the receipt */
+  color: #000; /* Black text */
+  border-radius: 4px;
+  padding: 20px;
+  width: 320px; /* Standard thermal receipt width */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.receipt-header {
+  text-align: center;
+  border-bottom: 1px dashed #000;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.receipt-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.receipt-details {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+.receipt-details div {
+  margin-bottom: 4px;
+}
+
+.receipt-items {
+  border-top: 1px dashed #000;
+  border-bottom: 1px dashed #000;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+.receipt-item span:first-child {
+  font-weight: bold;
+}
+
+.receipt-total {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 15px;
+}
+
+.receipt-footer {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.receipt-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.receipt-actions button {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-receipt-close {
+  background-color: #7f8c8d;
+  color: #fff;
+}
+.btn-receipt-print {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* This is the magic: It hides everything *except* the receipt when printing */
+@media print {
+  @page {
+  size: 80mm auto; /* 80mm wide, height adjusts to content */
+  margin: 2mm;
+}
+  body * {
+    visibility: hidden;
+  }
+  .receipt-modal-content, .receipt-modal-content * {
+    visibility: visible;
+  }
+  .receipt-modal-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: #000;
+  }
+  .receipt-actions {
+    display: none; /* Hide buttons when printing */
+  }
+}

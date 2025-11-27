@@ -1,0 +1,130 @@
+/* CustomerMergeTool.css */
+
+.merge-tool-page {
+  /* Ensures the component inherits standard report page padding */
+  padding: 20px 30px; 
+}
+
+.merge-header-card {
+  border: 1px solid #dc3545; /* Highlight the danger zone */
+  margin-bottom: 30px;
+  background-color: #2c2f38;
+}
+
+.merge-header-card .card-body p {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #ffc107; /* Warning yellow */
+}
+
+/* --- Merge Selection Grid Layout --- */
+.merge-selection-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* Source | Arrow | Target */
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* Individual Source/Target Cards */
+.source-card, .target-card {
+  height: 100%;
+  /* Use a slightly different background for contrast */
+  background-color: #252830; 
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.source-card .card-header,
+.target-card .card-header {
+  border-bottom: 1px solid #4a4d59;
+}
+
+.source-card .card-header h4 {
+  color: #dc3545; /* Red title */
+}
+
+.target-card .card-header h4 {
+  color: #28a745; /* Green title */
+}
+
+/* Info box beneath the selector */
+.selected-info {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+/* --- THIS IS THE CORRECTED SECTION --- */
+/* Ensure AsyncSelect styling is clean */
+.merge-tool-page .merge-select__control {
+  background-color: #1e1f24 !important;
+  border-color: #4a4d59 !important;
+  box-shadow: none !important; /* Removes default glow */
+  min-height: 40px; /* Helps with uniform height */
+}
+
+/* Fixes border color on hover */
+.merge-tool-page .merge-select__control:hover {
+  border-color: #4a4d59 !important;
+}
+
+/* Styles placeholder, selected value, AND typed text */
+.merge-tool-page .merge-select__single-value,
+.merge-tool-page .merge-select__placeholder,
+.merge-tool-page .merge-select__input-container {
+  color: #e0e0e0 !important;
+}
+
+/* Styles the dropdown arrow */
+.merge-tool-page .merge-select__indicator {
+  color: #e0e0e0 !important;
+}
+
+/* Hides the vertical line next to the arrow */
+.merge-tool-page .merge-select__indicator-separator {
+  display: none;
+}
+/* --- END OF CORRECTION --- */
+
+/* Action Button */
+.merge-action-card {
+  padding: 20px;
+  background-color: #2c2f38;
+}
+
+.merge-action-card .tab-button.active {
+  min-width: 300px;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 900px) {
+  .merge-selection-grid {
+    grid-template-columns: 1fr; /* Stack vertically on smaller screens */
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+  .merge-selection-grid div:nth-child(2) { /* Hide arrow separator */
+    display: none; 
+  }
+}
+/* --- NEW FIX: Styles the dropdown menu --- */
+
+/* Styles the dropdown box itself */
+.merge-tool-page .merge-select__menu {
+  background-color: #2c2f38 !important; /* Dark menu background */
+}
+
+/* Styles a regular item in the list */
+.merge-tool-page .merge-select__option {
+  background-color: #2c2f38 !important; /* Dark option background */
+  color: #e0e0e0 !important; /* Light text color */
+}
+
+/* Styles the item you are hovering over (the light blue one) */
+.merge-tool-page .merge-select__option--is-focused {
+  background-color: #007bff !important; /* Blue background on hover */
+  color: #ffffff !important; /* White text on hover */
+}
