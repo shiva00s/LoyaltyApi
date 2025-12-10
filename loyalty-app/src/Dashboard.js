@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import { toast } from 'react-toastify'; // <-- This is correctly removed as it's not used
-import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'; // <-- Kept for SignalR
+import { HubConnectionBuilder, LogLevel, HttpTransportType } from '@microsoft/signalr';
 import { FaPlusCircle, FaCheckCircle } from 'react-icons/fa';
 import { apiCall } from './ApiService';
 import { useAuth } from './AuthContext';
@@ -14,8 +13,9 @@ import TopRedeemersList from './Components/TopRedeemersList';
 import InactiveCustomersList from './Components/InactiveCustomersList';
 import LoadingSpinner from './Components/LoadingSpinner';
 
-
-const HUB_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:5212'}/dashboard-hub`; // <-- Kept for SignalR
+// Use the environment variable or fallback to default
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5212';
+const HUB_URL = `${API_BASE_URL}/dashboard-hub`;
 
 function Dashboard({ onCustomerSelect, refreshCounter }) {
   const [dashboardData, setDashboardData] = useState(null);
@@ -34,29 +34,33 @@ function Dashboard({ onCustomerSelect, refreshCounter }) {
     } finally {
         setIsLoading(false);
     }
-  }, [isLoading]); // <-- Dependency is correct
+  }, [isLoading]);
 
   // --- useEffect for initial data load and refreshCounter ---
   useEffect(() => {
     fetchAllData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refreshCounter]); // <-- Runs when refreshCounter changes
+  }, [refreshCounter]);
 
-  // --- NEW: Correct useEffect for SignalR ---
+  // --- FIXED: useEffect for SignalR with proper token handling ---
   useEffect(() => {
-  let connection;
+    let connection;
 
-  const setupSignalR = async () => {
-    connection = new HubConnectionBuilder()
-      .withUrl(HUB_URL) // <-- REMOVED the token options
-      .configureLogging(LogLevel.Information)
-      .withAutomaticReconnect()
-      .build();
+    const setupSignalR = async () => {
+      connection = new HubConnectionBuilder()
+        .withUrl(HUB_URL, {
+          accessTokenFactory: () => token,
+          skipNegotiation: false,
+          transport: HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling
+        })
+        .configureLogging(LogLevel.Information)
+        .withAutomaticReconnect()
+        .build();
 
-      // Listen for the "ReceiveDashboardUpdate" message from the server
+      // Listen for the "dashboardupdated" message from the server
       connection.on("dashboardupdated", () => {
         console.log("SignalR: Received dashboard update. Refetching...");
-        fetchAllData(); // Call fetchAllData to get new data
+        fetchAllData();
       });
 
       try {
@@ -78,8 +82,8 @@ function Dashboard({ onCustomerSelect, refreshCounter }) {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, fetchAllData]); // <-- Runs when token or fetchAllData function changes
-  // --- END: Correct useEffect for SignalR ---
+  }, [token, fetchAllData]);
+  // --- END: Fixed useEffect for SignalR ---
 
 
   // --- Customer Click Handler ---
@@ -120,7 +124,7 @@ function Dashboard({ onCustomerSelect, refreshCounter }) {
   return (
     <div className="dashboard-layout">
 
-      {/* --- REPLACED DashboardControls with simple Tabs --- */}
+      {/* --- Dashboard Tabs --- */}
       <div className="dashboard-controls">
             <div className="dashboard-tabs">
                 <button

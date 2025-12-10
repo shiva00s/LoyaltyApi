@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace LoyaltyAPI.Hubs
 {
-    [AllowAnonymous] // Allows the worker (system service) to connect
+    [AllowAnonymous] 
     public class DashboardHub : Hub
     {
         public override Task OnConnectedAsync()
