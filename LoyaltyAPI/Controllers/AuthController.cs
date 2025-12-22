@@ -225,6 +225,7 @@ namespace LoyaltyAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("users")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllUsers()
         {
             var sql = "SELECT UserID, Username, Role, StaffName, IsActive, DateCreated FROM Users ORDER BY StaffName";

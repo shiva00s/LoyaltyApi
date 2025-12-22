@@ -74,7 +74,7 @@ const handleCustomerClick = (cardNo) => {
                   <th><FaUsers /> Customer Name</th>
                   <th><FaIdCard /> Card No / Contact</th>
                   <th><FaTrophy /> Tier</th>
-                  <th><FaGift /> Balance Points</th> {/* <-- ADD THIS */}
+                  <th><FaGift /> Balance Points</th>
                   <th><FaGift /> Coupons Earned (Lifetime)</th>
                   <th><FaCheckCircle /> Coupons Redeemed (Lifetime)</th>
                   <th><FaMoneyBillWave /> Value Redeemed (Lifetime)</th>
@@ -83,7 +83,7 @@ const handleCustomerClick = (cardNo) => {
               <tbody>
                 {reportData.length === 0 ? (
                    <tr>
-                      <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#a0a5b1' }}>
+                      <td colSpan="7" style={{ textAlign: 'center', padding: '20px', color: '#a0a5b1' }}>
                           No customer data found.
                       </td>
                    </tr>
@@ -93,13 +93,13 @@ const handleCustomerClick = (cardNo) => {
                     return (
                       <tr key={cust.cardNo}>
                        <td>
-    <button 
-        className="clickable-name"
-        onClick={() => handleCustomerClick(cust.cardNo)}
-    >
-        <strong>{cust.cName || 'N/A'}</strong>
-    </button>
-</td>
+                        <button 
+                            className="clickable-name"
+                            onClick={() => handleCustomerClick(cust.cardNo)}
+                        >
+                            <strong>{cust.cName || 'N/A'}</strong>
+                        </button>
+                       </td>
                         <td>
                           <div>{cust.cardNo}</div>
                           <div style={{fontSize: '0.9em', color: '#a0a5b1'}}>{cust.cContact}</div>
@@ -109,7 +109,7 @@ const handleCustomerClick = (cardNo) => {
                             {icon} {cust.tier}
                           </span>
                         </td>
-                        <td style={{ textAlign: 'right', fontWeight: 'bold' }}>{cust.balancePoints || 0}</td> {/* <-- ADD THIS */}
+                        <td style={{ textAlign: 'right', fontWeight: 'bold' }}>{cust.balancePoints || 0}</td>
                         <td style={{ textAlign: 'right' }}>{cust.totalCouponsEarned}</td>
                         <td style={{ textAlign: 'right' }}>{cust.totalCouponsRedeemed}</td>
                         <td style={{ textAlign: 'right' }}>{cust.totalValueRedeemed.toFixed(2)} rs</td>
